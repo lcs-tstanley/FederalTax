@@ -32,19 +32,24 @@ class ViewController: UIViewController {
       switch exampleAnnualIncome {
           
       case 0...47630:
-          print("tax = 15%")
+        let taxOwed = exampleAnnualIncome * 0.15
+           self.taxOwed.text = String(format: "%.2f", taxOwed)
           
       case 47631...95259:
-          print("tax = 20.5%")
-          
+          let taxOwed = exampleAnnualIncome * 0.205
+            self.taxOwed.text = String(format: "%.2f", taxOwed)
+     
       case 95260...147667:
-          print("tax = 26%")
-          
+        let taxOwed = exampleAnnualIncome * 0.26
+            self.taxOwed.text = String(format: "%.2f", taxOwed)
+     
       case 147668...210371:
-          print("tax = 29%")
-          
+        let taxOwed = exampleAnnualIncome * 0.29
+            self.taxOwed.text = String(format: "%.2f", taxOwed)
+      
       default:
-          print("Tax = 33%")
+        let taxOwed = exampleAnnualIncome * 0.33
+            self.taxOwed.text = String(format: "%.2f", taxOwed)
             
             
         }
