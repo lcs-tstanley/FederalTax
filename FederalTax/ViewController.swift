@@ -25,19 +25,27 @@ class ViewController: UIViewController {
     
     @IBAction func calculateTaxes(_ sender: Any) {
         
-        let annualIncomeText = annualIncomeTextField.text!
-        let exampleAnnualIncome = Double(annualIncomeText)!
+        // Get income as a String
+        guard let annualIncomeText = annualIncomeTextField.text else {
+            errorMessageLabel.text = "Please enter your name"
+            return
+        }
         
-        let userNameText = userNameTextField.text!
+        // Get income as a Double
+        guard let exampleAnnualIncome = Double(annualIncomeText) else {
+            errorMessageLabel.text = "Please enter a numeric income."
+            return
+        }
+        
         
         switch exampleAnnualIncome {
             
         case 0...47630:
             
             //Calculate and set label for taxOwed rounded to 2 decimal places
-             let taxOwed = exampleAnnualIncome * 0.15
+            let taxOwed = exampleAnnualIncome * 0.15
             let taxOwedFormatted = String(format: "%.2f", taxOwed)
-            self.taxOwed.text = String("\(userNameText) your federal tax owing is \(taxOwedFormatted)")
+            self.taxOwed.text = String("Bob your federal tax owing is \(taxOwedFormatted)")
             self.taxOwed.textColor = UIColor.lightText
             
             //Calculate and set label for taxRate rounded to 1 decimal place
@@ -62,7 +70,7 @@ class ViewController: UIViewController {
         case 95260...147667:
             
             //Calculate and set label for taxOwed rounded to 2 decimal places
-           let taxOwed = 47630 * 0.15 + 47629 * 0.205 + (exampleAnnualIncome - 95259) * 0.26
+            let taxOwed = 47630 * 0.15 + 47629 * 0.205 + (exampleAnnualIncome - 95259) * 0.26
             let taxOwedFormatted = String(format: "%.2f", taxOwed)
             self.taxOwed.text = String("\(userNameText) your federal tax owing is \(taxOwedFormatted)")
             self.taxOwed.textColor = UIColor.lightText
@@ -90,7 +98,7 @@ class ViewController: UIViewController {
         default:
             
             //Calculate and set label for taxOwed rounded to 2 decimal places
-             let taxOwed = 47630 * 0.15 + 47629 * 0.205 + 52408 * 0.26 + 62704 * 0.29 + (exampleAnnualIncome - 210371) * 0.33
+            let taxOwed = 47630 * 0.15 + 47629 * 0.205 + 52408 * 0.26 + 62704 * 0.29 + (exampleAnnualIncome - 210371) * 0.33
             let taxOwedFormatted = String(format: "%.2f", taxOwed)
             self.taxOwed.text = String("\(userNameText) your federal tax owing is \(taxOwedFormatted)")
             self.taxOwed.textColor = UIColor.lightText
