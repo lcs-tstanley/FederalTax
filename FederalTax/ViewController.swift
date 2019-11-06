@@ -25,18 +25,39 @@ class ViewController: UIViewController {
     
     @IBAction func calculateTaxes(_ sender: Any) {
         
+        // Get user name as a String
+        
+        guard let userNameText = userNameTextField.text, userNameText != "" else {
+            errorMessageLabel.text = "Please enter your name."
+            self.errorMessageLabel.textColor = UIColor.lightText
+            self.taxOwed.textColor = UIColor.systemGray
+            self.taxRate.textColor = UIColor.systemGray
+            return
+        }
+        
         // Get income as a String
         guard let annualIncomeText = annualIncomeTextField.text else {
-            errorMessageLabel.text = "Please enter your name"
+            errorMessageLabel.text = "Please enter a valid numeric income."
+            self.errorMessageLabel.textColor = UIColor.lightText
+            self.taxOwed.textColor = UIColor.systemGray
+            self.taxRate.textColor = UIColor.systemGray
             return
         }
         
         // Get income as a Double
         guard let exampleAnnualIncome = Double(annualIncomeText) else {
-            errorMessageLabel.text = "Please enter a numeric income."
+            errorMessageLabel.text = "Please enter a valid numeric income."
+            self.errorMessageLabel.textColor = UIColor.lightText
+            self.taxOwed.textColor = UIColor.systemGray
+            self.taxRate.textColor = UIColor.systemGray
             return
         }
         
+        // Get rid of error label
+        
+        self.errorMessageLabel.textColor = UIColor.systemGray
+        
+        // Find out which case the user's annual income belongs to
         
         switch exampleAnnualIncome {
             
@@ -45,7 +66,7 @@ class ViewController: UIViewController {
             //Calculate and set label for taxOwed rounded to 2 decimal places
             let taxOwed = exampleAnnualIncome * 0.15
             let taxOwedFormatted = String(format: "%.2f", taxOwed)
-            self.taxOwed.text = String("Bob your federal tax owing is \(taxOwedFormatted)")
+            self.taxOwed.text = String("\(userNameText) your federal tax owing is \(taxOwedFormatted)")
             self.taxOwed.textColor = UIColor.lightText
             
             //Calculate and set label for taxRate rounded to 1 decimal place
